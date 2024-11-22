@@ -2,7 +2,7 @@
 // fetch_pengukuran.php
 
 // Include your database connection file
-require_once 'konfig.php'; // Adjust the path as necessary
+require_once '../konfig.php'; // Adjust the path as necessary
 
 // Check if id_noir is set in the GET request
 if (isset($_GET['id_noir'])) {

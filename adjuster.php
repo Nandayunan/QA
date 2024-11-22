@@ -66,9 +66,9 @@ $acting = $_SESSION['acting'];
                     <i class="fas fa-home"></i>Home
                 </button>
                 <!-- Ubah data-toggle dan data-target menjadi data-bs-toggle dan data-bs-target -->
-<button type="button" data-bs-toggle="modal" data-bs-target="#addNoIrModal" class="btn btn-primary">
-    <i class="fas fa-plus"></i> Add
-</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addNoIrModal" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add
+                </button>
             </div>
         </div>
     </div>
@@ -163,10 +163,10 @@ $acting = $_SESSION['acting'];
         </div>
     </div>
     <!-- jQuery harus di-load pertama -->
-<script src="assets/jquery/jquery.min.js"></script>
-<script src="assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/sweetalert2/dist/sweetalert2.all.min.js"></script>
-<script src="assets/js/nscript.js"></script>
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="assets/js/nscript.js"></script>
     <script>
         function confirmLogout() {
             Swal.fire({
@@ -303,7 +303,7 @@ $acting = $_SESSION['acting'];
 
                 // AJAX request to fetch id_form
                 $.ajax({
-                    url: 'fetch_pengukuran.php',
+                    url: 'proses/fetch_pengukuran.php',
                     type: 'GET',
                     data: {
                         id_noir: selectedIdIr // Send the correct id_noir

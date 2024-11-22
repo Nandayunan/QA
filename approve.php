@@ -272,17 +272,17 @@ $result = $conn->query($sql);
             }
 
             // Approve Record
-window.approveRecord = function(id_form) {
-    $.ajax({
-        url: 'fetch_approve.php',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            id_form: id_form
-        }),
-        success: function(data) {
-            console.log(data);
-            let approveDetails = `
+            window.approveRecord = function(id_form) {
+                $.ajax({
+                    url: 'proses/fetch_approve.php',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        id_form: id_form
+                    }),
+                    success: function(data) {
+                        console.log(data);
+                        let approveDetails = `
                 <div class="left-align">
                     <p><strong>No IR:</strong> ${data.no_ir || ''}</p>
                     <p><strong>Jenis IR:</strong> ${data.ir || ''}</p>

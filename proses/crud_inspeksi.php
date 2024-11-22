@@ -1,5 +1,5 @@
 <?php
-include 'konfig.php';
+include '../konfig.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve and sanitize form data
@@ -60,4 +60,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>

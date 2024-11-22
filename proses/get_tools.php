@@ -1,5 +1,5 @@
 <?php
-include 'konfig.php'; // Database connection
+include '../konfig.php'; // Database connection
 
 header('Content-Type: application/json');
 // Get JSON input

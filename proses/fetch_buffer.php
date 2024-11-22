@@ -1,6 +1,6 @@
 <?php
 // fetch_buffer.php
-include 'konfig.php'; // Database configuration
+include '../konfig.php'; // Database configuration
 
 $id_form = $_POST['id_form']; // Assuming id_form is sent via POST
 $id_inspeksi = $_POST['id_inspeksi']; // Assuming id_inspeksi is sent via POST

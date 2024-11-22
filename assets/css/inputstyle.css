@@ -63,7 +63,8 @@ header .logout-btn {
     border-collapse: collapse;
 }
 
-.inspection-table th, .inspection-table td {
+.inspection-table th,
+.inspection-table td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
@@ -78,18 +79,22 @@ header .logout-btn {
     height: 20px;
     border-radius: 50%;
     margin: 0 auto;
-    background-color: #ff4d4d; /* Default to not OK */
+    background-color: #ff4d4d;
+    /* Default to not OK */
 }
 
 .status-ok {
-    background-color: #4CAF50 !important; /* Green */
+    background-color: #4CAF50 !important;
+    /* Green */
 }
 
 .status-not-ok {
-    background-color: #ff4d4d !important; /* Red */
+    background-color: #ff4d4d !important;
+    /* Red */
 }
 
-.edit-button, .delete-button {
+.edit-button,
+.delete-button {
     padding: 5px 10px;
     margin: 2px;
     cursor: pointer;
@@ -128,4 +133,81 @@ header .logout-btn {
 .home-btn img {
     width: 24px;
     height: auto;
+}
+
+.scroll-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.scroll-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.home-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-btn img {
+    width: 24px;
+    height: auto;
+}
+
+.add-inspection-btn {
+    background-color: #3085d6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styling for the edit image button */
+.edit-image-btn {
+    background-color: #007bff;
+    /* Blue background color */
+    color: white;
+    /* White text color */
+    border: none;
+    /* Remove default border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px 20px;
+    /* Padding for button */
+    font-size: 16px;
+    /* Font size */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for background color */
+}
+
+.edit-image-btn:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+.edit-image-btn:focus {
+    outline: none;
+    /* Remove outline on focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+    /* Add a subtle box-shadow on focus */
 }

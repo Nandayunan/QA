@@ -1,5 +1,5 @@
 <?php
-include 'konfig.php';
+include '../konfig.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = isset($_POST['action']) ? $_POST['action'] : '';
@@ -8,7 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id_inspeksi = isset($_POST['id_inspeksi']) ? intval($_POST['id_inspeksi']) : null;
 
         if ($id_inspeksi !== null) {
-            // Prepare SQL query for deleting the record
+            // Hapus data terkait di tabel `testing`
+            $deleteTesting = "DELETE FROM testing WHERE id_inspeksi = ?";
+            $stmtTesting = $conn->prepare($deleteTesting);
+
+            if ($stmtTesting === false) {
+                die("Prepare failed: " . $conn->error);
+            }
+
+            $stmtTesting->bind_param("i", $id_inspeksi);
+            $stmtTesting->execute();
+            $stmtTesting->close();
+
+            // Hapus data di tabel `inspeksi`
             $query = "DELETE FROM inspeksi WHERE id_inspeksi = ?";
             $stmt = $conn->prepare($query);
 
@@ -16,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 die("Prepare failed: " . $conn->error);
             }
 
-            // Bind parameters and execute
             $stmt->bind_param("i", $id_inspeksi);
             if ($stmt->execute()) {
                 echo "Success";
@@ -36,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>

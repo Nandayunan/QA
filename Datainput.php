@@ -321,112 +321,112 @@
         <script>
             // Function to enable the input fields in the selected row
             // Function to enable the input fields in the selected row
-// Function to enable the input fields in the selected row
-async function enableInput(row) {
-    const rowElement = document.querySelector(`tr[data-row="${row}"]`);
-    const inputs = rowElement.querySelectorAll('.input-text');
-    const selects = rowElement.querySelectorAll('.input-select');
-    const terukur = parseInt(rowElement.getAttribute('data-terukur')); // Assuming terukur is set as a data attribute
+            // Function to enable the input fields in the selected row
+            async function enableInput(row) {
+                const rowElement = document.querySelector(`tr[data-row="${row}"]`);
+                const inputs = rowElement.querySelectorAll('.input-text');
+                const selects = rowElement.querySelectorAll('.input-select');
+                const terukur = parseInt(rowElement.getAttribute('data-terukur')); // Assuming terukur is set as a data attribute
 
-    // Enable all inputs and selects in the row
-    inputs.forEach(input => input.disabled = false);
-    selects.forEach(select => select.disabled = false);
+                // Enable all inputs and selects in the row
+                inputs.forEach(input => input.disabled = false);
+                selects.forEach(select => select.disabled = false);
 
-    // Focus on the first enabled input or select
-    if (inputs.length > 0) {
-        inputs[0].focus();
+                // Focus on the first enabled input or select
+                if (inputs.length > 0) {
+                    inputs[0].focus();
 
-        // Add event listeners for navigation with Enter key
-        inputs.forEach((input, index) => {
-            input.addEventListener('keydown', async function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault(); // Prevent form submission on Enter key
+                    // Add event listeners for navigation with Enter key
+                    inputs.forEach((input, index) => {
+                        input.addEventListener('keydown', async function(event) {
+                            if (event.key === 'Enter') {
+                                event.preventDefault(); // Prevent form submission on Enter key
 
-                    if (terukur === 2) {
-                        // If terukur == 2, allow manual input and skip tool check
-                        checkStatus(row); // Directly check status after input
-                        const nextInput = inputs[index + 1];
-                        if (nextInput) {
-                            nextInput.focus();
-                        }
-                    } else {
-                        const rawInput = input.value;
-                        const parseInput = parseCaliperValue(rawInput);
+                                if (terukur === 2) {
+                                    // If terukur == 2, allow manual input and skip tool check
+                                    checkStatus(row); // Directly check status after input
+                                    const nextInput = inputs[index + 1];
+                                    if (nextInput) {
+                                        nextInput.focus();
+                                    }
+                                } else {
+                                    const rawInput = input.value;
+                                    const parseInput = parseCaliperValue(rawInput);
 
-                        // Call checkTool function and wait for the result
-                        const isValid = await checkTool(rowElement, parseInput?.idTools);
+                                    // Call checkTool function and wait for the result
+                                    const isValid = await checkTool(rowElement, parseInput?.idTools);
 
-                        if (isValid) {
-                            // If tool matches, update value and focus the next input
-                            input.value = parseInput.valueTools;
-                            checkStatus(row);
+                                    if (isValid) {
+                                        // If tool matches, update value and focus the next input
+                                        input.value = parseInput.valueTools;
+                                        checkStatus(row);
 
-                            const nextInput = inputs[index + 1];
-                            if (nextInput) {
-                                nextInput.focus();
+                                        const nextInput = inputs[index + 1];
+                                        if (nextInput) {
+                                            nextInput.focus();
+                                        }
+                                    } else {
+                                        // If the tool is invalid, clear input, show alert, and disable further inputs
+                                        input.value = '';
+                                        alert('Alat tidak sesuai!'); // Alert if the tool is invalid
+
+                                        // Disable all inputs after the current one
+                                        disableRemainingInputs(inputs, index + 1);
+                                    }
+                                }
                             }
-                        } else {
-                            // If the tool is invalid, clear input, show alert, and disable further inputs
-                            input.value = '';
-                            alert('Alat tidak sesuai!'); // Alert if the tool is invalid
-
-                            // Disable all inputs after the current one
-                            disableRemainingInputs(inputs, index + 1);
-                        }
-                    }
+                        });
+                    });
                 }
-            });
-        });
-    }
-}
-
-// Helper function to disable inputs from a given start index
-function disableRemainingInputs(inputs, startIndex) {
-    for (let i = startIndex; i < inputs.length; i++) {
-        inputs[i].disabled = true;
-    }
-}
-
-// Function to verify tool data with AJAX
-function verifyToolData(rawData) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: 'get_tools.php',
-            type: 'POST',
-            data: {
-                id_tools: rawData,
-            },
-            success: function(response) {
-                // Resolve with tool name if found
-                resolve(response.nama_tools);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error verifying tool:", error);
-                reject(error);
             }
-        });
-    });
-}
 
-// Function to check tool id with the hidden id_tools field in the row
-async function checkTool(rowElement, idToolsInput) {
-    const hiddenIdToolsInput = rowElement.querySelector('input[name="id_tools"]');
-    const namaToolsInput = rowElement.querySelector('input[name="nama_tools[]"]'); // Get hidden input for nama_tools
+            // Helper function to disable inputs from a given start index
+            function disableRemainingInputs(inputs, startIndex) {
+                for (let i = startIndex; i < inputs.length; i++) {
+                    inputs[i].disabled = true;
+                }
+            }
 
-    try {
-        const namaToolsAjax = await verifyToolData(idToolsInput); // Await AJAX result
-        const inputValue = String(namaToolsInput.value).toLowerCase();
-        const targetValue = String(namaToolsAjax).toLowerCase();
+            // Function to verify tool data with AJAX
+            function verifyToolData(rawData) {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: 'proses/get_tools.php',
+                        type: 'POST',
+                        data: {
+                            id_tools: rawData,
+                        },
+                        success: function(response) {
+                            // Resolve with tool name if found
+                            resolve(response.nama_tools);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error verifying tool:", error);
+                            reject(error);
+                        }
+                    });
+                });
+            }
 
-        // Check if targetValue is a substring of inputValue or vice versa
-        const isValid = inputValue.includes(targetValue) || targetValue.includes(inputValue);
+            // Function to check tool id with the hidden id_tools field in the row
+            async function checkTool(rowElement, idToolsInput) {
+                const hiddenIdToolsInput = rowElement.querySelector('input[name="id_tools"]');
+                const namaToolsInput = rowElement.querySelector('input[name="nama_tools[]"]'); // Get hidden input for nama_tools
 
-        return isValid;
-    } catch (error) {
-        console.error("Tool verification failed:", error);
-        return false;
-    }
-}
+                try {
+                    const namaToolsAjax = await verifyToolData(idToolsInput); // Await AJAX result
+                    const inputValue = String(namaToolsInput.value).toLowerCase();
+                    const targetValue = String(namaToolsAjax).toLowerCase();
+
+                    // Check if targetValue is a substring of inputValue or vice versa
+                    const isValid = inputValue.includes(targetValue) || targetValue.includes(inputValue);
+
+                    return isValid;
+                } catch (error) {
+                    console.error("Tool verification failed:", error);
+                    return false;
+                }
+            }
 
 
 
@@ -652,70 +652,70 @@ async function checkTool(rowElement, idToolsInput) {
 
 
             // Function to check the status of a specific row
-function checkStatus(row) {
-    const rowElement = document.querySelector(`tr[data-row="${row}"]`);
-    const inputs = rowElement.querySelectorAll('.input-text');
-    const selects = rowElement.querySelectorAll('.input-select');
-    const standar = parseFloat(rowElement.getAttribute('data-standar'));
-    const min = parseFloat(rowElement.getAttribute('data-min'));
-    const max = parseFloat(rowElement.getAttribute('data-max'));
-    const statusIcon = document.getElementById(`status${row}`);
-    const statusInput = document.getElementById(`statusInput${row}`);
-    let status = 1; // Default to 1 (OK)
+            function checkStatus(row) {
+                const rowElement = document.querySelector(`tr[data-row="${row}"]`);
+                const inputs = rowElement.querySelectorAll('.input-text');
+                const selects = rowElement.querySelectorAll('.input-select');
+                const standar = parseFloat(rowElement.getAttribute('data-standar'));
+                const min = parseFloat(rowElement.getAttribute('data-min'));
+                const max = parseFloat(rowElement.getAttribute('data-max'));
+                const statusIcon = document.getElementById(`status${row}`);
+                const statusInput = document.getElementById(`statusInput${row}`);
+                let status = 1; // Default to 1 (OK)
 
-    // Check numeric inputs (terukur == 1 or 2)
-    inputs.forEach(input => {
-        let value = parseFloat(input.value);
-        if (!isNaN(value)) {
-            if (value === 0) {
-                input.value = ''; // Hide value if it is 0
-            } else if (value >= min && value <= max) {
-                input.style.backgroundColor = 'green';
-                input.style.color = 'white';
-            } else {
-                input.style.backgroundColor = 'red';
-                input.style.color = 'white';
-                status = 0; // Set to 0 (NG) if any value doesn't match
+                // Check numeric inputs (terukur == 1 or 2)
+                inputs.forEach(input => {
+                    let value = parseFloat(input.value);
+                    if (!isNaN(value)) {
+                        if (value === 0) {
+                            input.value = ''; // Hide value if it is 0
+                        } else if (value >= min && value <= max) {
+                            input.style.backgroundColor = 'green';
+                            input.style.color = 'white';
+                        } else {
+                            input.style.backgroundColor = 'red';
+                            input.style.color = 'white';
+                            status = 0; // Set to 0 (NG) if any value doesn't match
+                        }
+                    } else {
+                        input.style.backgroundColor = '';
+                        input.style.color = '';
+                    }
+                });
+
+                // Check dropdown selects (terukur == 0)
+                selects.forEach(select => {
+                    const selectedValue = select.value;
+                    if (selectedValue === '0') { // NG
+                        select.style.backgroundColor = 'red';
+                        select.style.color = 'white';
+                        status = 0; // Set to 0 (NG) if any dropdown is NG
+                    } else if (selectedValue === '1') { // OK
+                        select.style.backgroundColor = 'green';
+                        select.style.color = 'white';
+                    } else {
+                        select.style.backgroundColor = '';
+                        select.style.color = '';
+                    }
+                });
+
+                // Update the status icon based on the overall status
+                if (status === 1) {
+                    statusIcon.classList.add('status-ok');
+                    statusIcon.classList.remove('status-ng');
+                    statusIcon.textContent = 'OK';
+                    statusIcon.style.backgroundColor = 'green';
+                    statusIcon.style.color = 'white';
+                } else {
+                    statusIcon.classList.add('status-ng');
+                    statusIcon.classList.remove('status-ok');
+                    statusIcon.textContent = 'NG';
+                    statusIcon.style.backgroundColor = 'red';
+                    statusIcon.style.color = 'white';
+                }
+
+                statusInput.value = status; // Update hidden input value
             }
-        } else {
-            input.style.backgroundColor = '';
-            input.style.color = '';
-        }
-    });
-
-    // Check dropdown selects (terukur == 0)
-    selects.forEach(select => {
-        const selectedValue = select.value;
-        if (selectedValue === '0') { // NG
-            select.style.backgroundColor = 'red';
-            select.style.color = 'white';
-            status = 0; // Set to 0 (NG) if any dropdown is NG
-        } else if (selectedValue === '1') { // OK
-            select.style.backgroundColor = 'green';
-            select.style.color = 'white';
-        } else {
-            select.style.backgroundColor = '';
-            select.style.color = '';
-        }
-    });
-
-    // Update the status icon based on the overall status
-    if (status === 1) {
-        statusIcon.classList.add('status-ok');
-        statusIcon.classList.remove('status-ng');
-        statusIcon.textContent = 'OK';
-        statusIcon.style.backgroundColor = 'green';
-        statusIcon.style.color = 'white';
-    } else {
-        statusIcon.classList.add('status-ng');
-        statusIcon.classList.remove('status-ok');
-        statusIcon.textContent = 'NG';
-        statusIcon.style.backgroundColor = 'red';
-        statusIcon.style.color = 'white';
-    }
-
-    statusInput.value = status; // Update hidden input value
-}
 
 
 
@@ -804,7 +804,7 @@ function checkStatus(row) {
 
                     // AJAX request to fetch buffer data for each row
                     $.ajax({
-                        url: 'fetch_buffer.php',
+                        url: 'proses/fetch_buffer.php',
                         type: 'POST',
                         data: {
                             id_form: id_form,

@@ -1,5 +1,5 @@
 <?php
-include 'konfig.php';
+include '../konfig.php';
 
 header('Content-Type: application/json');
 
