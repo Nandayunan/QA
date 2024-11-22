@@ -1,0 +1,40 @@
+/* Ensure the modal content is full width */
+.modal-content {
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Style for the table to ensure it is responsive and well-formatted */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* Styling for status icons */
+.status-icon {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+
+.status-ok {
+    background-color: #28a745; /* Green for OK */
+}
+
+.status-ng {
+    background-color: #dc3545; /* Red for NG */
+}

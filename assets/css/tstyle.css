@@ -1,0 +1,194 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #12108c;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    height: 50px;
+    margin-left: 20px;
+}
+
+.header .title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.clock-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.clock {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.container {
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.table {    
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+.input-text {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.input-select {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.locked-button {
+    background-color: navy;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: not-allowed;
+    border-radius: 4px;
+}
+
+.input-button {
+    background-color: rgb(40, 8, 198);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.submit-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.logout {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.final-submit-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.final-submit-button {
+    background-color: rgb(3, 7, 135);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.center-image {
+    display: block;
+    margin: 0 auto 20px; /* Center the image horizontally and add some space below */
+}
+
+.locked-button {
+    background-color: navy;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: not-allowed;
+    border-radius: 4px;
+}
+.input-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.submit-button {
+    background-color: rgb(2, 33, 134);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.logout {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.final-submit-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.final-submit-button {
+    background-color: rgb(15, 15, 190);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.center-image {
+    display: block;
+    margin: 0 auto 20px; /* Center the image horizontally and add some space below */
+}

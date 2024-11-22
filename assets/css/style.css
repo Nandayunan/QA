@@ -1,0 +1,201 @@
+/* Existing styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fafafb;
+    padding: 20px;
+    color: white;
+    min-height: 100vh;
+    margin-top: 100px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #002060;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-bottom: 100px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+}
+
+.clock {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.logout {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.request-pbb-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #3665f1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.request-pbb-btn:hover {
+    background-color: #0921fa; /* Slightly darker grey on hover */
+}
+
+.box {
+    width: 45%;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.box-header, .box-item, .plus {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.box-header {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.box-item {
+    background-color: #f4f4f4;
+}
+
+.plus {
+    background-color: #cccccc;
+}
+
+.ir {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #2466f5;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Changed from 50% to 4px for rectangular shape */
+    font-size: 24px;
+    cursor: pointer;
+}
+/* 
+.ir:hover{
+    background-color: #0800ff;
+} */
+
+.logout {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #ff5c5c;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.logout:hover {
+    background-color: #ff1c1c;
+}
+
+/* Ensure the button container is positioned correctly */
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.approve {
+    padding: 10px 20px;
+    background-color: #2466f5;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Rectangular shape */
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.approve:hover {
+    background-color: #1a53d4; /* Slightly darker blue on hover */
+}
+
+.ir {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Rectangular shape */
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+/* .ir:hover {
+    background-color: #0f08de; Darker blue on hover */
+/* } */
+
+
+

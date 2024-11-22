@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #1a237e;
+    color: white;
+    z-index: 1000;
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.clock {
+    font-size: 1.2em;
+    margin-left: 80px;
+}
+
+.logout {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.logout:hover {
+    background-color: #d32f2f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 70px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Gaya untuk tombol aksi dalam tabel */
+.action-btn {
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin: 0 2px;
+}
+
+.action-btn:hover {
+    background-color: #15256b;
+}
+
+.action-btn i {
+    margin-right: 0;
+}
+
+/* Gaya untuk tombol tambah baris baru */
+.add-row-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-row-btn {
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.add-row-btn:hover {
+    background-color: #15256b;
+}
+
+/* Gaya untuk input di dalam tabel */
+#ir-table input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Gaya untuk tombol navigasi di bawah tabel */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.nav-btn:hover {
+    background-color: #15256b;
+}
+
+.nav-btn i {
+    margin-right: 5px;
+}

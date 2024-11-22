@@ -1,0 +1,183 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow: auto;
+    height: 100%;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #002060;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.logo {
+    height: 40px;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+}
+
+.clock {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.logout {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 130px;
+}
+
+.title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002060;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 10px;
+    background-color: #081f65;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button i {
+    font-size: 16px;
+}
+
+.table-container {
+    width: 100%;
+}
+
+.no-ir-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.no-ir-table th,
+.no-ir-table td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+}
+
+.no-ir-table th {
+    background-color: #f1f1f1;
+}
+
+.no-ir-table td {
+    background-color: #6e726e;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.no-ir-table td:hover {
+    background-color: #515451;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #081f65;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.button-container button i {
+    margin-right: 8px;
+}
+
+/* Custom CSS for wider modal */
+.modal-lg-custom {
+    max-width: 80%;
+    /* Set modal width to 80% of the viewport width */
+}
+
+@media (max-width: 768px) {
+    .modal-lg-custom {
+        max-width: 100%;
+        /* For small screens, use full width */
+    }
+}

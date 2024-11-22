@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fafafb;
+    padding: 20px;
+    color: white;
+    min-height: 100vh;
+}
+
+.header {
+    width: 100%;
+    background-color: #002f63;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Ubah nilai margin-bottom sesuai kebutuhan */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin-bottom: 50px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.clock {
+    font-size: 1.25rem;
+    margin-right: 100px;
+}
+
+.logout {
+    background-color: #ff5c5c; /* Warna merah */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 20px; /* Memberikan jarak antar elemen */
+}
+
+.logout:hover {
+    background-color: #f00a0a; /* Warna merah lebih gelap saat hover */
+}
+
+.content {
+    width: 100%;
+    margin-bottom: 100px; /* Tambahkan margin-top untuk memberi ruang bagi header yang fixed */
+}
+
+.box-header {
+    background-color: #626f7d;
+    color: white;
+    padding: 15px;
+    font-size: 1.25rem;
+    margin-bottom: 80px; /* Sesuaikan jarak bottom sesuai kebutuhan */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 95%; /* Agar box header memenuhi lebar penuh */
+    display: block; /* Memastikan elemen ini tampil sebagai block */
+    clear: both; /* Membersihkan float di sekitarnya, jika ada */
+    margin-top: 100px;
+    
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.box-item {
+    background-color: #004080;
+    color: white;
+    padding: 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.box-item:hover {
+    background-color: #0059b3;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.nav-button {
+    background-color: #004080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    margin-left: 20px;
+}
+
+.nav-button:hover {
+    background-color: #0059b3;
+}

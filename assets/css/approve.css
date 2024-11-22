@@ -1,0 +1,93 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #002060;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-bottom: 100px;
+}
+
+.main {
+    margin-bottom: 80px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+}
+
+.clock {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.logout,
+.home {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.home {
+    margin-right: 10px;
+    /* Add margin to the home button */
+    color: black;
+    background-color: #f2f3fc;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-waiting {
+    background-color: #6c757d;
+    color: white;
+}
+
+.status-progress {
+    background-color: #ffc107;
+    color: black;
+}
+
+.status-finish {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-pending {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Sembunyikan baris dengan status Finish secara default */
+.hidden-row {
+    display: none;
+}
+
+.status-decline {
+    color: red;
+    font-weight: bold;
+}
+
+.left-align {
+    text-align: left;
+}
