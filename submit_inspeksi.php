@@ -130,6 +130,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query2->close();
 
+    // Update status di tabel form
+    $queryUpdateStatus = $conn->prepare("UPDATE form SET status = 1 WHERE id_form = ?");
+    if (!$queryUpdateStatus) {
+        $response['status'] = 'error';
+        $response['message'] = "Prepare statement gagal: " . $conn->error;
+        error_log(print_r($response, true));
+        echo json_encode($response);
+        exit;
+    }
+
+    // Binding parameter
+    $queryUpdateStatus->bind_param("i", $id_form);
+
+    // Eksekusi query untuk update status
+    if (!$queryUpdateStatus->execute()) {
+        $response['status'] = 'error';
+        $response['message'] = "Eksekusi gagal: " . $queryUpdateStatus->error;
+        error_log(print_r($response, true));
+        echo json_encode($response);
+        exit;
+    }
+
+    $queryUpdateStatus->close();
+
     // Jika semua data berhasil disimpan
     $response['status'] = 'success';
     $response['message'] = 'Data berhasil dimasukkan ke database dan notifikasi terkirim.';

@@ -717,10 +717,6 @@
                 statusInput.value = status; // Update hidden input value
             }
 
-
-
-
-
             function confirmSubmit(row) {
                 Swal.fire({
                     title: 'Konfirmasi',

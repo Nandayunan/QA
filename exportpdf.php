@@ -42,7 +42,7 @@ $sql2 = "SELECT testing.id_inspeksi, inspeksi.item_inspeksi, inspeksi.standar, i
          LEFT JOIN inspeksi ON testing.id_inspeksi = inspeksi.id_inspeksi
          LEFT JOIN tools ON inspeksi.id_tools = tools.id_tools
          WHERE testing.id_form = ?
-         ORDER BY testing.id_inspeksi ASC"; 
+         ORDER BY testing.id_inspeksi ASC";
 
 
 $stmt2 = $conn->prepare($sql2);
@@ -86,7 +86,7 @@ while ($row_note = $result_notes->fetch_assoc()) {
     SELECT golongan, acting 
     FROM ct_users 
     WHERE npk = ?";
-    
+
     $stmt_user = $conn2->prepare($sql_user);
     $stmt_user->bind_param("i", $npk);
     $stmt_user->execute();
@@ -139,23 +139,23 @@ $qr_image_path_prepare = 'assets/pdfqrcodes/qrcode_prepare_' . $no_ir . '.png';
 
 // Generate QR codes with the specified data in the required format
 QRcode::png(
-    "No IR: $no_ir\nTelah melakukan approve pada tanggal: $tgl_approve\nOleh: $approve", 
-    $qr_image_path_approve, 
-    QR_ECLEVEL_L, 
+    "No IR: $no_ir\nTelah melakukan approve pada tanggal: $tgl_approve\nOleh: $approve",
+    $qr_image_path_approve,
+    QR_ECLEVEL_L,
     1.8
 );
 
 QRcode::png(
-    "No IR: $no_ir\nTelah dilakukan check pada tanggal: $tgl_check\nOleh: $check", 
-    $qr_image_path_check, 
-    QR_ECLEVEL_L, 
+    "No IR: $no_ir\nTelah dilakukan check pada tanggal: $tgl_check\nOleh: $check",
+    $qr_image_path_check,
+    QR_ECLEVEL_L,
     1.8
 );
 
 QRcode::png(
-    "No IR: $no_ir\nTelah dipersiapkan pada tanggal: $tgl_prepare\nOleh: $prepare", 
-    $qr_image_path_prepare, 
-    QR_ECLEVEL_L, 
+    "No IR: $no_ir\nTelah dipersiapkan pada tanggal: $tgl_prepare\nOleh: $prepare",
+    $qr_image_path_prepare,
+    QR_ECLEVEL_L,
     1.8
 );
 
@@ -299,7 +299,8 @@ $rowYPosition = 55;
 $no = 1;
 $rowCount = 0; // To count rows and handle pagination
 
-function adjustTextToFitCell($pdf, $x, $y, $w, $h, $text, $border = 1, $align = 'C') {
+function adjustTextToFitCell($pdf, $x, $y, $w, $h, $text, $border = 1, $align = 'C')
+{
     $pdf->SetXY($x, $y);
     $fontSize = 10; // Ukuran font awal
     $pdf->SetFont('Times', '', $fontSize);
@@ -324,7 +325,8 @@ function adjustTextToFitCell($pdf, $x, $y, $w, $h, $text, $border = 1, $align = 
 
 
 // Function to print header
-function printHeader($pdf, $row) {
+function printHeader($pdf, $row)
+{
     // Set up header
     $pdf->SetFont('Times', 'B', 9);
     $pdf->SetXY(5, 10);
@@ -503,7 +505,7 @@ $hasilJudge = ($hasNgZero) ? 'NG' : ($allStatusOk ? 'OK' : 'Mixed');
 
 // Calculate the Y position for the footer, leaving some space at the bottom (e.g., 15mm from the bottom)
 $pageHeight = $pdf->GetPageHeight(); // Get the page height
-$footerYPosition = $pageHeight - 45; // Adjust as necessary for spacing
+$footerYPosition = $pageHeight - 42; // Adjust as necessary for spacing
 
 // Display the HASIL JUDGE result
 $pdf->SetXY(5, $footerYPosition); // Position HASIL JUDGE label
@@ -519,9 +521,9 @@ $pdf->SetFont('Arial', '', 10); // Reset to default font size
 
 // Notes for Supervisor and Manager
 $pdf->SetXY(40, $footerYPosition);
-$pdf->Cell(90, 18, 'Note Supervisor: ' . $note_supervisor , 1, 1, 'C');
+$pdf->Cell(90, 18, 'Note Supervisor: ' . $note_supervisor, 1, 1, 'C');
 $pdf->SetXY(40, $footerYPosition + 18);
-$pdf->Cell(90, 17, 'Note Manager: ' . $note_manager , 1, 1, 'C');
+$pdf->Cell(90, 17, 'Note Manager: ' . $note_manager, 1, 1, 'C');
 
 
 $pdf->SetFont('Arial', '', 8); // Reset to default font size
@@ -575,4 +577,3 @@ $pdf->Cell(25, 5, 'Operator', 1, 1, 'C');
 // Add any additional content for page 2 here as needed
 
 $pdf->Output();
-?>

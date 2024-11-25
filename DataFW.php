@@ -62,20 +62,20 @@
             $sampling_qty = $_POST['sampling-qty'];
             $jenis_ir = $_POST['jenis-ir'];
             $supplier = $_POST['supplier']; // New Supplier field
-            $status = 1;
+            $status = 0;
             $prepare = $npk;
             date_default_timezone_set('Asia/Jakarta');
             $tgl_prepare = date('Y-m-d H:i:s');
-        
+
             // Prepare SQL with the new "supplier" field
             $stmt = $conn->prepare("INSERT INTO form (id_noir, no_ppb, receive_qty, sampling_qty, jenis_ir, supplier, status, prepare, tgl_prepare) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             if (!$stmt) {
                 die('Prepare statement failed: ' . $conn->error);
             }
-        
+
             // Bind parameters, including the new supplier field
             $stmt->bind_param("isiisssss", $id_noir, $no_ppb, $receive_qty, $sampling_qty, $jenis_ir, $supplier, $status, $prepare, $tgl_prepare);
-        
+
             if ($stmt->execute()) {
                 $id_form = $conn->insert_id;
                 echo "<script>window.location.href = 'datainput.php?no_ir=" . urlencode($no_ir) . "&id_form=" . urlencode($id_form) . "';</script>";
@@ -84,13 +84,13 @@
             }
             $stmt->close();
         }
-        
+
         $conn->close();
-        
+
         ?>
 
 
-<form id="qa-form" method="POST" onsubmit="return validateForm(event)">
+        <form id="qa-form" method="POST" onsubmit="return validateForm(event)">
             <div class="mb-3">
                 <label for="no-ir" class="form-label">Part Number</label>
                 <input type="text" id="no-ir" name="no-ir" class="form-control" value="<?php echo htmlspecialchars($no_ir); ?>" readonly required>
@@ -105,7 +105,7 @@
                 <label for="supplier" class="form-label">Supplier</label>
                 <input type="text" id="supplier" name="supplier" class="form-control" required>
             </div>
-            
+
             <div class="mb-3">
                 <label for="no-ppb" class="form-label">NO. SPB</label>
                 <input type="text" id="no-ppb" name="no-ppb" class="form-control" required>
@@ -165,35 +165,35 @@
         }
 
         function validateForm(event) {
-    event.preventDefault();
+            event.preventDefault();
 
-    let noIr = document.getElementById('no-ir').value.trim();
-    let jenisIr = document.getElementById('jenis-ir').value.trim();
-    let noPpb = document.getElementById('no-ppb').value.trim();
-    let supplier = document.getElementById('supplier').value.trim();
-    let receiveQty = parseInt(document.getElementById('receive-qty').value.trim());
-    let samplingQty = parseInt(document.getElementById('sampling-qty').value.trim());
+            let noIr = document.getElementById('no-ir').value.trim();
+            let jenisIr = document.getElementById('jenis-ir').value.trim();
+            let noPpb = document.getElementById('no-ppb').value.trim();
+            let supplier = document.getElementById('supplier').value.trim();
+            let receiveQty = parseInt(document.getElementById('receive-qty').value.trim());
+            let samplingQty = parseInt(document.getElementById('sampling-qty').value.trim());
 
-    // Check if any field is empty
-    if (!noIr || !jenisIr || !noPpb || !supplier || !receiveQty || !samplingQty) {
-        Swal.fire('Error', 'All fields are required!', 'error');
-        return false;
-    }
+            // Check if any field is empty
+            if (!noIr || !jenisIr || !noPpb || !supplier || !receiveQty || !samplingQty) {
+                Swal.fire('Error', 'All fields are required!', 'error');
+                return false;
+            }
 
-    // Additional validations for quantities
-    if (samplingQty > receiveQty) {
-        var myModal = new bootstrap.Modal(document.getElementById('alertModal'));
-        myModal.show();
-        return false;
-    }
+            // Additional validations for quantities
+            if (samplingQty > receiveQty) {
+                var myModal = new bootstrap.Modal(document.getElementById('alertModal'));
+                myModal.show();
+                return false;
+            }
 
-    if (samplingQty > 10) {
-        Swal.fire('Error', 'Sampling qty cannot exceed 10!', 'error');
-        return false;
-    }
+            if (samplingQty > 10) {
+                Swal.fire('Error', 'Sampling qty cannot exceed 10!', 'error');
+                return false;
+            }
 
-    confirmSubmit(); // Call the confirmation function if all validations pass
-}
+            confirmSubmit(); // Call the confirmation function if all validations pass
+        }
 
 
 

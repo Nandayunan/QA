@@ -354,7 +354,7 @@ $conn->close();
                     // Send data to the server using AJAX
                     $.ajax({
                         type: 'POST',
-                        url: 'crud_inspeksi.php',
+                        url: 'proses/crud_inspeksi.php',
                         data: {
                             no_ir: noIr, // Send the hidden no_ir value
                             item_inspeksi: itemInspeksi,
@@ -410,97 +410,120 @@ $conn->close();
         }
 
         function editInspection(id, no_ir) {
-            // First, we get the tools data from the server via Ajax
+            // Ambil data inspeksi berdasarkan id_inspeksi
             $.ajax({
-                url: 'proses/fetch_tools.php', // A new PHP file that retrieves tools data
+                url: 'proses/fetch_inspeksi.php', // PHP untuk fetch inspeksi data berdasarkan id_inspeksi
                 type: 'GET',
+                data: {
+                    id_inspeksi: id
+                },
                 success: function(response) {
-                    const tools = JSON.parse(response); // Parse the JSON response from PHP
-                    let alatDropdown = '<select id="alat" class="swal2-input">';
-                    alatDropdown += '<option value="" disabled selected>Pilih Alat</option>';
+                    const res = JSON.parse(response); // Parse JSON response dari PHP
+                    if (res.success) {
+                        const data = res.data;
 
-                    // Loop through tools and add options
-                    tools.forEach(tool => {
-                        alatDropdown += `<option value="${tool.id_tools}">${tool.nama_tools}</option>`;
-                    });
-                    alatDropdown += '</select>';
+                        // Setelah mendapatkan data inspeksi, ambil data alat
+                        $.ajax({
+                            url: 'proses/fetch_tools.php', // PHP untuk fetch data tools
+                            type: 'GET',
+                            success: function(toolsResponse) {
+                                const tools = JSON.parse(toolsResponse); // Parse JSON response dari PHP
+                                let alatDropdown = '<select id="alat" class="swal2-input">';
+                                alatDropdown += '<option value="" disabled>Pilih Alat</option>';
 
-                    // Display the modal
-                    Swal.fire({
-                        title: 'Edit Inspection',
-                        html: `
-                    <input type="hidden" id="no_ir" value="${no_ir}">
-                    <input type="text" id="item_inspeksi" class="swal2-input" placeholder="Item Inspeksi">
-                    <input type="text" id="standar" class="swal2-input" placeholder="Standar">
-                    ${alatDropdown}
-                    <input type="number" id="min" class="swal2-input" placeholder="Min">
-                    <input type="number" id="max" class="swal2-input" placeholder="Max">
-                    <select id="terukur" class="swal2-input">
-                        <option value="" disabled selected>Pilih terukur</option>
-                        <option value="1">Terukur</option>
-                        <option value="0">Tidak Terukur</option>
-                        <option value="2">Terukur Manual</option>
-                    </select>
-                `,
-                        showCancelButton: true,
-                        confirmButtonText: 'Save',
-                        cancelButtonText: 'Cancel',
-                        preConfirm: () => {
-                            const no_ir = document.getElementById('no_ir').value;
-                            const item_inspeksi = document.getElementById('item_inspeksi').value;
-                            const standar = document.getElementById('standar').value;
-                            const alat = document.getElementById('alat').value;
-                            const min = document.getElementById('min').value;
-                            const max = document.getElementById('max').value;
-                            const terukur = document.getElementById('terukur').value;
+                                // Loop data tools dan tambahkan options
+                                tools.forEach(tool => {
+                                    // Tandai alat yang sesuai dengan id_tools yang tersimpan di data inspeksi
+                                    const selected = tool.id_tools == data.id_tools ? 'selected' : '';
+                                    alatDropdown += `<option value="${tool.id_tools}" ${selected}>${tool.nama_tools}</option>`;
+                                });
+                                alatDropdown += '</select>';
 
-                            // Validate that required fields are not empty
-                            if (!item_inspeksi || !standar || !alat || terukur === '') {
-                                Swal.showValidationMessage('Please fill out all required fields.');
-                                return false;
+                                // Tampilkan modal dengan data inspeksi yang sudah terisi
+                                Swal.fire({
+                                    title: 'Edit Inspection',
+                                    html: `
+                                <input type="hidden" id="no_ir" value="${no_ir}">
+                                <input type="text" id="item_inspeksi" class="swal2-input" placeholder="Item Inspeksi" value="${data.item_inspeksi}">
+                                <input type="text" id="standar" class="swal2-input" placeholder="Standar" value="${data.standar}">
+                                ${alatDropdown}
+                                <input type="number" id="min" class="swal2-input" placeholder="Min" value="${data.min}">
+                                <input type="number" id="max" class="swal2-input" placeholder="Max" value="${data.max}">
+                                <select id="terukur" class="swal2-input">
+                                    <option value="" disabled ${data.terukur === null ? 'selected' : ''}>Pilih terukur</option>
+                                    <option value="1" ${data.terukur == 1 ? 'selected' : ''}>Terukur</option>
+                                    <option value="0" ${data.terukur == 0 ? 'selected' : ''}>Tidak Terukur</option>
+                                    <option value="2" ${data.terukur == 2 ? 'selected' : ''}>Terukur Manual</option>
+                                </select>
+                            `,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Save',
+                                    cancelButtonText: 'Cancel',
+                                    preConfirm: () => {
+                                        const no_ir = document.getElementById('no_ir').value;
+                                        const item_inspeksi = document.getElementById('item_inspeksi').value;
+                                        const standar = document.getElementById('standar').value;
+                                        const alat = document.getElementById('alat').value;
+                                        const min = document.getElementById('min').value;
+                                        const max = document.getElementById('max').value;
+                                        const terukur = document.getElementById('terukur').value;
+
+                                        // Validasi input yang wajib diisi
+                                        if (!item_inspeksi || !standar || !alat || terukur === '') {
+                                            Swal.showValidationMessage('Please fill out all required fields.');
+                                            return false;
+                                        }
+
+                                        return {
+                                            no_ir: no_ir,
+                                            item_inspeksi: item_inspeksi,
+                                            standar: standar,
+                                            alat: alat, // id_tools
+                                            min: min,
+                                            max: max,
+                                            terukur: terukur
+                                        };
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Kirim data via Ajax
+                                        $.ajax({
+                                            url: 'proses/crud_inspeksi.php',
+                                            type: 'POST',
+                                            data: {
+                                                id_inspeksi: id,
+                                                no_ir: result.value.no_ir,
+                                                item_inspeksi: result.value.item_inspeksi,
+                                                standar: result.value.standar,
+                                                alat: result.value.alat, // id_tools
+                                                min: result.value.min,
+                                                max: result.value.max,
+                                                terukur: result.value.terukur
+                                            },
+                                            success: function(response) {
+                                                Swal.fire('Success', response, 'success');
+                                            },
+                                            error: function(xhr, status, error) {
+                                                Swal.fire('Error', 'Terjadi kesalahan: ' + error, 'error');
+                                            }
+                                        });
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Tidak bisa mengambil data tools: ' + error, 'error');
                             }
-
-                            return {
-                                no_ir: no_ir,
-                                item_inspeksi: item_inspeksi,
-                                standar: standar,
-                                alat: alat, // This is the id_tools
-                                min: min,
-                                max: max,
-                                terukur: terukur
-                            };
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Send data via $.ajax
-                            $.ajax({
-                                url: 'proses/crud_inspeksi.php',
-                                type: 'POST',
-                                data: {
-                                    id_inspeksi: id,
-                                    no_ir: result.value.no_ir,
-                                    item_inspeksi: result.value.item_inspeksi,
-                                    standar: result.value.standar,
-                                    alat: result.value.alat, // Pass id_tools here
-                                    min: result.value.min,
-                                    max: result.value.max,
-                                    terukur: result.value.terukur
-                                },
-                                success: function(response) {
-                                    Swal.fire('Success', response, 'success');
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Terjadi kesalahan: ' + error, 'error');
-                                }
-                            });
-                        }
-                    });
+                        });
+                    } else {
+                        Swal.fire('Error', res.message, 'error');
+                    }
                 },
                 error: function(xhr, status, error) {
-                    Swal.fire('Error', 'Tidak bisa mengambil data tools: ' + error, 'error');
+                    Swal.fire('Error', 'Tidak bisa mengambil data inspeksi: ' + error, 'error');
                 }
             });
         }
+
 
 
 
